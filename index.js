@@ -23,15 +23,13 @@ db.once('open', function () {
 })
 
 /* Create a new schema in the previously specified database, 
-where you can add text to the database */
+which you can use to add text to the database */
 const todoSchema = new mongoose.Schema({
     text: { type: String, required: true }
 })
 
-// model
+// a model to handle the various todos
 const Todo = mongoose.model('Todo', todoSchema, 'todos')
-
-// Routes here...
 
 /* a method to get all todos from the database, 
 using an empty search query */
