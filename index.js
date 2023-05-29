@@ -32,9 +32,16 @@ const todoSchema = new mongoose.Schema({
   // Routes here...
 
 // todos-route
-app.get('/todos', (request, response) => {
-  response.send('Todos')
-})
+app.get('/todos', async (request, response) => {
+    const todos = await Todo.find({})
+    response.json(todos)
+  })
+
+  app.get('/todos/:id', async (request, response) => {
+    const todo = await Todo.findById(request.params.id)
+    if (todo) response.json(todo)
+    else response.status(404).end()
+  })
 
 app.post('/todos', async (request, response) => {
     const { text } = request.body
@@ -43,6 +50,12 @@ app.post('/todos', async (request, response) => {
     })
     const savedTodo = await todo.save()
     response.json(savedTodo)  
+  })
+
+  app.delete('/todos/:id', async (request, response) => {
+    const deletedTodo = await Todo.findByIdAndRemove(request.params.id)
+    if (deletedTodo) response.json(deletedTodo)
+    else response.status(404).end()
   })
 
 // app listen port 3000
