@@ -1,0 +1,11 @@
+{
+  "name": "@automatedarjane/todo_app_project",
+  "version": "1.0.0",
+  "description": "Creating my first todo app",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "author": "Arjane Kerkhoven",
+  "license": "ISC"
+}
