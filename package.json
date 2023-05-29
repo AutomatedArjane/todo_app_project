@@ -4,6 +4,8 @@
   "description": "Creating my first todo app",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "exit 0"
   },
   "author": "Arjane Kerkhoven",
