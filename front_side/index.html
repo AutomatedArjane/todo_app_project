@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="front_side/styles.css">
     <title>Todo app</title>
-</head>
-<body>
-    <h1>PUT STUFF HERE</h1>
-
-
-
     <script src="front_side/code.js"></script>
+</head>
+<body onload="init()">
+    <div id="container">
+      <h1>Assignment list</h1>
+      <input type="text" id="newTodo"/>
+      <button onclick="addTodo()">Add</button>
+      <ul id="todosList"></ul>
+      <p id="infoText"></p>
+    </div>
 </body>
 </html>
