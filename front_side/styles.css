@@ -40,6 +40,6 @@ body {
   
   .delete {
     cursor: pointer;
-    color: red;
+    color: rgb(196, 0, 0);
     font-weight: bold;
   }
