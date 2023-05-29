@@ -1,37 +1,37 @@
 body {
-    font-family: 'Oswald', sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
   #container {
     width: 420px;
-    background-color:aliceblue;
+    background-color:rgb(231, 174, 174);
     border-radius: 3px;
     padding: 0px 15px 0px 15px;
     margin: 10px auto;
-    border: 1px solid #ddd;
+    border: 1px dashed #001347;
   }
   
   h1 {
-    background-color: cadetblue;
+    background-color: rgb(141, 0, 0);
     text-align: center;
     color: white;
     padding: 5px;
   }
   
   ul {
-    list-style-type: square;
+    list-style-type: georgian;
     margin: 20px 0 20px 0;
   }
   
   input[type=text] {
-    border: 1px solid #ccc;
+    border: 2px solid #640048;
     padding: 5px;
     width: 300px;
     font-size: 15px;
   }
   
   button {
-    border: 1px solid #ccc;
+    border: 1px solid #760000;
     margin-left: 15px;
     padding: 5px 15px;
     font-size: 15px;
