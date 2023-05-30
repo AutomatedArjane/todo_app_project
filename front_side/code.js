@@ -1,9 +1,11 @@
+// On page load, the todos get loaded using the loadTodos() function
 function init() {
     let infoText = document.getElementById('infoText')
     infoText.innerHTML = 'Loading task list from the server, please wait...'
     loadTodos()
 }
 
+// fetch the todos from the database and show them using the showTodos() function
 async function loadTodos() {
     let response = await fetch('http://localhost:3000/todos')
     let todos = await response.json()
@@ -24,8 +26,8 @@ function createTodoListItem(todo) {
     let text = document.createTextNode(todo.text)
     // add the text to the li-element
     li.appendChild(text)
-    // create a new span-element, with the letter X inside it, to delete tasks
-    // EDIT function
+    // create a new span-element, with the word 'edit' inside it, to edit tasks
+    // this part is for creating the EDIT button
     let span_edit = document.createElement('span')
     // create a new class-attribute
     let span_edit_attr = document.createAttribute('class')
@@ -34,16 +36,16 @@ function createTodoListItem(todo) {
     span_edit_attr.value = 'edit'
     // add the attribute to the span-element
     span_edit.setAttributeNode(span_edit_attr)
-    // create a text node containing the letter X
+    // create a text node containing the word 'edit'
     let edit = document.createTextNode(' edit ')
-    // attach the x-span node to the span element (visible)
+    // attach the edit-span node to the span element (visible)
     span_edit.appendChild(edit)
     // configure the span-element's onclick-event to call the editTodo function
     span_edit.onclick = function () { editTodo(todo._id) }
     // add a span-element to the li-element
     li.appendChild(span_edit)
     // return the created li-element
-    // DELETE function
+    // this part is for creating the DELETE button (the 'x')
     let span_del = document.createElement('span')
     // create a new class-attribute
     let span_del_attr = document.createAttribute('class')
@@ -61,10 +63,11 @@ function createTodoListItem(todo) {
     // add a span-element to the li-element
     li.appendChild(span_del)
     // return the created li-element
-    // it then has the form: <li id="mongoIDXXXXX">Remember to call...<span class="remove">x</span></li>
     return li
 }
 
+/* check if there are any items in the database, 
+and store them in the todosList variable */
 function showTodos(todos) {
     let todosList = document.getElementById('todosList')
     let infoText = document.getElementById('infoText')
@@ -72,6 +75,7 @@ function showTodos(todos) {
     if (todos.length === 0) {
         infoText.innerHTML = 'No todos'
     } else {
+        // add each todo to the list
         todos.forEach(todo => {
             let li = createTodoListItem(todo)
             todosList.appendChild(li)
@@ -80,6 +84,7 @@ function showTodos(todos) {
     }
 }
 
+// get the text from the input box, and post it to the server
 async function addTodo() {
     let newTodo = document.getElementById('newTodo')
     const data = { 'text': newTodo.value }
@@ -100,6 +105,7 @@ async function addTodo() {
     newTodo.value = ''
 }
 
+// through clicking the X, a delete request for a specific todo gets sent
 async function removeTodo(id) {
     const response = await fetch('http://localhost:3000/todos/' + id, {
         method: 'DELETE'
@@ -115,6 +121,8 @@ async function removeTodo(id) {
     }
 }
 
+/* clicking the 'edit' button gets the text from the todo, and puts
+it in the text box. The grey 'add' button changes into a yellow 'save' button */
 async function editTodo(id) {
     var addButton = document.querySelector('button[onclick="addTodo()"]');
     addButton.setAttribute("onclick", `saveEditedTodo('${id}')`);
@@ -129,6 +137,7 @@ async function editTodo(id) {
     editedTodo.value = todoText;
 }
 
+// clicking 'save' activates the put-function, thus updating the todo
 async function saveEditedTodo(id) {
     let editedTodo = document.getElementById('newTodo');
     const data = { 'text': editedTodo.value };
@@ -140,11 +149,15 @@ async function saveEditedTodo(id) {
         body: JSON.stringify(data)
     })
     
+    /* if the server says the todo got successfully updated,
+    the website will display the updated todo, and the text box
+    will be emptied */
     if (response.ok) {
         let li = document.getElementById(id);
         li.firstChild.nodeValue = editedTodo.value;
         editedTodo.value = '';
 
+        // the yellow 'Save' button changes back to a grey 'Add' button
         var addButton = document.querySelector('button[onclick="saveEditedTodo(\'' + id + '\')"]');
         addButton.setAttribute("onclick", "addTodo()");
         addButton.textContent = "Add";
