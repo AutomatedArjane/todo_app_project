@@ -30,7 +30,16 @@ body {
     font-size: 15px;
   }
   
-  button {
+  button#save-button {
+    border: 1px solid rgb(0, 0, 118);
+    background-color: rgb(255, 255, 0);
+    margin-left: 15px;
+    padding: 5px 15px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  button#edit-button {
     border: 1px solid rgb(0, 0, 118);
     margin-left: 15px;
     padding: 5px 15px;
@@ -41,5 +50,11 @@ body {
   .delete {
     cursor: pointer;
     color: rgb(210, 0, 0);
+    font-weight: bold;
+  }
+  
+  .edit {
+    cursor: pointer;
+    color: rgb(7, 0, 210);
     font-weight: bold;
   }
