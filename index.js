@@ -62,6 +62,18 @@ app.delete('/todos/:id', async (request, response) => {
     else response.status(404).end()
 })
 
+// update specific todos
+app.put('/todos/:id', async (request, response) => {
+    const { id } = request.params;
+    const { text } = request.body;
+
+    Todo.findByIdAndUpdate(id, { text }, { new: true })
+        .then(updatedTodo => {
+            if (updatedTodo) response.json(updatedTodo)
+            else response.status(404).end()
+        });
+});
+
 // app listen port 3000
 app.listen(port, () => {
     console.log('Example app listening on port 3000')
